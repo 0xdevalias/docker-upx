@@ -6,8 +6,19 @@ This makes use of [Docker's multi-stage builds](https://docs.docker.com/engine/u
 
 ## Usage
 
+You could run it directly on some mapped volume:
+
 ```
-TODO
+docker run --rm -v "$PWD/foo:/foo" devalias/upx:devel --brute -o /foo/bar.upx /foo/bar
+```
+
+Or you could copy it into another Dockerfile:
+
+```
+FROM devalias/upx:devel AS upx
+
+FROM your/baseimage
+COPY --from=upx /usr/bin/upx /usr/bin/upx
 ```
 
 ## GitHub
